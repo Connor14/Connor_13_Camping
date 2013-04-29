@@ -87,30 +87,28 @@ public class CampingBlockCabinBlock extends Block
         if (rotation == 3)
         {
         	
-            par1World.setBlock(x, y + 1, z, Block.torchWood.blockID, rotation, 3);
+            par1World.setBlock(x, y + 1, z, Block.glowStone.blockID, rotation, 3);
 
         	//The Cabin is a 9 x 9 x 5 structure with a 7 x 7 x 3 interior
         	
         	//FLOOR PLACEMENT
         	int flrx = -4;
         	int flrz = 0;
-        	while(flrx <= 4)
+        	for(flrx = -4; flrx <= 4; flrx++)
         	{
         		for(flrz = -4;flrz <= 4; flrz++)
         		{
                 	par1World.setBlock(x + flrx, y - 1, z + flrz, Block.planks.blockID, rotation, 3);
         		}
-        		
-        		flrx = flrx + 1;
         	}
+        	
         	//WALL PLACEMENT
         	int wallx;
         	int wallz;
-        	int wally = 0;
+        	int wally;
         	int wlongz;
-        	int wshortx;
-
-        	while(wally <= 2)
+        	int wshortx;        	
+        	for(wally = 0; wally <=2; wally++)
         	{
         		//Longer Walls (front/back)
         		wallx = -4;
@@ -132,20 +130,17 @@ public class CampingBlockCabinBlock extends Block
         			}
         			wallz = wallz + 8;
         		}
-        		wally = wally + 1;
         	}
         	
         	//Roof PLACEMENT
-        	int roofx = -4;
-        	int roofz = 0;
-        	while(roofx <= 4)
+        	int roofx;
+        	int roofz;
+        	for(roofx = -4; roofx <= 4; roofx++)
         	{
         		for(roofz = -4;roofz <= 4; roofz++)
         		{
                 	par1World.setBlock(x + roofx, y + 3, z + roofz, Block.planks.blockID, rotation, 3);
         		}
-        		
-        		roofx = roofx + 1;
         	}
         }
     }
@@ -154,7 +149,7 @@ public class CampingBlockCabinBlock extends Block
      */
     public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int par5) 
     {
-    	//Removes the entire cabin
+    	//Removes the entire cabin and floor
     	for(int deletey = -1;deletey <= 3;deletey++)
     	{
     		for(int deletex = -4;deletex <= 4;deletex++)

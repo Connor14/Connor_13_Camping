@@ -3,8 +3,11 @@ package Connor_13_Camping.common;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemBed;
+import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
@@ -48,7 +51,8 @@ public class CampingBlockCabinBlock extends Block
     {        
 
     	//Clears all the area that the cabin will take up BEFORE building
-    	for(int airy = -1;airy <= 3;airy++)
+    	//Set airy = -1 for floor.  airy = 0 for no floor
+    	for(int airy = 0;airy <= 3;airy++)
     	{
     		for(int airx = -4;airx <= 4;airx++)
     		{
@@ -92,7 +96,8 @@ public class CampingBlockCabinBlock extends Block
         	//The Cabin is a 9 x 9 x 5 structure with a 7 x 7 x 3 interior
         	
         	//FLOOR PLACEMENT
-        	int flrx = -4;
+        	/**
+            int flrx = -4;
         	int flrz = 0;
         	for(flrx = -4; flrx <= 4; flrx++)
         	{
@@ -101,6 +106,7 @@ public class CampingBlockCabinBlock extends Block
                 	par1World.setBlock(x + flrx, y - 1, z + flrz, Block.planks.blockID, rotation, 3);
         		}
         	}
+        	*/
         	
         	//WALL PLACEMENT
         	int wallx;
@@ -142,6 +148,16 @@ public class CampingBlockCabinBlock extends Block
                 	par1World.setBlock(x + roofx, y + 3, z + roofz, Block.planks.blockID, rotation, 3);
         		}
         	}
+        	
+        	//Furnishing Placement
+        	//DOOR
+			par1World.setBlockToAir(x - 4, y, z);
+			par1World.setBlockToAir(x - 4, y + 1, z);
+        	ItemDoor.placeDoorBlock(par1World, x - 4, y, z, rotation, doorWood);
+        	
+        	par1World.setBlock(x, y, z - 1, Block.bed.blockID, rotation, 3);
+
+        	//
         }
     }
     /**
@@ -150,7 +166,8 @@ public class CampingBlockCabinBlock extends Block
     public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int par5) 
     {
     	//Removes the entire cabin and floor
-    	for(int deletey = -1;deletey <= 3;deletey++)
+    	//Set deletey = -1 for removing floor.  deletey = 0 for no floor
+    	for(int deletey = 0;deletey <= 3;deletey++)
     	{
     		for(int deletex = -4;deletex <= 4;deletex++)
     		{

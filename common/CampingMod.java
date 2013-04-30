@@ -17,15 +17,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "connor_Camping", name = "Camping", version = "1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-//To do
-	//register textures
-	//register entities
-//Matt's Ideas
-	//Stain Glass (with disign)
-	//Throne
-	//Armour
-	//Bowls with Flames
-	//Shields
 //Seprate Mod
 	//Cooking Mod
 		//Peppers

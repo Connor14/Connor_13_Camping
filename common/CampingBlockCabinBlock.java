@@ -3,6 +3,7 @@ package Connor_13_Camping.common;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -67,31 +68,31 @@ public class CampingBlockCabinBlock extends Block
     		}
     	}
     	
-    	int rotation = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+    	int equation = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         
         //When z increases (E)
-        if (rotation == 0)
+        if (equation == 0)
         {
-            par1World.setBlock(x, y + 1, z, Block.cobblestone.blockID, rotation, 3);
+            par1World.setBlock(x, y + 1, z, Block.cobblestone.blockID, equation, 3);
         }
 
         //When x decreases (S)
-        if (rotation == 1)
+        if (equation == 1)
         {
-            par1World.setBlock(x, y + 1, z, Block.netherrack.blockID, rotation, 3);
+            par1World.setBlock(x, y + 1, z, Block.netherrack.blockID, equation, 3);
         }
         
         //When z decreases (W)
-        if (rotation == 2)
+        if (equation == 2)
         {
-            par1World.setBlock(x, y + 1, z, Block.dirt.blockID, rotation, 3);
+            par1World.setBlock(x, y + 1, z, Block.dirt.blockID, equation, 3);
         }
 
         //When x increases (N)
-        if (rotation == 3)
+        if (equation == 3)
         {
         	
-            par1World.setBlock(x, y + 1, z, Block.glowStone.blockID, rotation, 3);
+            par1World.setBlock(x, y + 1, z, Block.glowStone.blockID, equation, 3);
 
         	//The Cabin is a 9 x 9 x 5 structure with a 7 x 7 x 3 interior
         	
@@ -103,7 +104,7 @@ public class CampingBlockCabinBlock extends Block
         	{
         		for(flrz = -4;flrz <= 4; flrz++)
         		{
-                	par1World.setBlock(x + flrx, y - 1, z + flrz, Block.planks.blockID, rotation, 3);
+                	par1World.setBlock(x + flrx, y - 1, z + flrz, Block.planks.blockID, equation, 3);
         		}
         	}
         	*/
@@ -122,7 +123,7 @@ public class CampingBlockCabinBlock extends Block
         		{
         			for(wlongz = -4; wlongz <= 4; wlongz++)
         			{
-        	        	par1World.setBlock(x + wallx, y + wally, z + wlongz, Block.brick.blockID, rotation, 3);
+        	        	par1World.setBlock(x + wallx, y + wally, z + wlongz, Block.brick.blockID, equation, 3);
         			}
         			wallx = wallx + 8;
         		}
@@ -132,7 +133,7 @@ public class CampingBlockCabinBlock extends Block
         		{
         			for(wshortx = -3; wshortx <= 3; wshortx++)
         			{
-        	        	par1World.setBlock(x + wshortx, y + wally, z + wallz, Block.stone.blockID, rotation, 3);
+        	        	par1World.setBlock(x + wshortx, y + wally, z + wallz, Block.stone.blockID, equation, 3);
         			}
         			wallz = wallz + 8;
         		}
@@ -145,19 +146,37 @@ public class CampingBlockCabinBlock extends Block
         	{
         		for(roofz = -4;roofz <= 4; roofz++)
         		{
-                	par1World.setBlock(x + roofx, y + 3, z + roofz, Block.planks.blockID, rotation, 3);
+                	par1World.setBlock(x + roofx, y + 3, z + roofz, Block.planks.blockID, equation, 3);
         		}
         	}
         	
         	//Furnishing Placement
-        	//DOOR
+        	//Door
 			par1World.setBlockToAir(x - 4, y, z);
 			par1World.setBlockToAir(x - 4, y + 1, z);
-        	ItemDoor.placeDoorBlock(par1World, x - 4, y, z, rotation, doorWood);
+        	ItemDoor.placeDoorBlock(par1World, x - 4, y, z, equation, doorWood);
         	
-        	par1World.setBlock(x, y, z - 1, Block.bed.blockID, rotation, 3);
+        	//Bed
+        		//Head of the bed must be North of the foot of the bed
+            BlockBed blockbed = (BlockBed)Block.bed;
+            par1World.setBlock(x - 2, y, z - 3, blockbed.blockID, equation, 3); //Foot of the bed
+            par1World.setBlock(x - 1, y, z - 3, blockbed.blockID, equation + 8, 3); //Head of the bed
 
-        	//
+        	//Large Chest
+            par1World.setBlock(x + 2, y, z - 3, Block.chest.blockID, equation, 3);
+            par1World.setBlock(x + 1, y, z - 3, Block.chest.blockID, equation, 3);
+            
+            //Furnace
+            par1World.setBlock(x + 3, y, z, Block.furnaceIdle.blockID, equation, 3);
+            par1World.setBlock(x + 3, y, z + 1, Block.furnaceIdle.blockID, equation, 3);
+
+            //Crafting Bench
+            par1World.setBlock(x + 3, y, z - 1, Block.workbench.blockID, equation, 3);
+            
+            //Torches - not rotated correctly
+            par1World.setBlock(x - 3, y + 1, z - 1, Block.torchWood.blockID, equation, 3);
+            par1World.setBlock(x - 3, y + 1, z + 1, Block.torchWood.blockID, equation, 3);
+
         }
     }
     /**

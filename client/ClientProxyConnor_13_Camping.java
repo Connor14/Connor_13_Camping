@@ -12,5 +12,6 @@ public class ClientProxyConnor_13_Camping extends CommonProxyConnor_13_Camping
 	public void registerRenderThings()
 	{
 		MinecraftForgeClient.preloadTexture("");
+    	ClientRegistry.bindTileEntitySpecialRenderer(CampingTileEntityLantern.class, new CampingRenderLantern());
 	}
 }

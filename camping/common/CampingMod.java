@@ -1,5 +1,8 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common;
 
+import Connor_13_Camping.camping.common.blocks.*;
+import Connor_13_Camping.camping.common.items.*;
+import Connor_13_Camping.camping.common.tile_entities.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,12 +24,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = CampingMod.modid, name = "Camping", version = "1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-//Seprate Mod
-	//Cooking Mod
-		//Peppers
-		//Spices
-		//New Food
-		//Drinks
+//File Names
+	/* Put Camping, Adventure, or Hunting Prefix based on the part of the mod they belong to. 
+	 * CampingBlockLantern or AdventureEntityATV
+	 */
 
 //Textures
 	/*textures go here: minecraft.jar - /mods/Connor_Camping/textures/blocks or /items
@@ -51,7 +52,7 @@ public class CampingMod
 {
     public static final String modid = "Connor_Camping";
 	
-	@SidedProxy(clientSide = "Connor_13_Camping.client.ClientProxyConnor_13_Camping", serverSide = "Connor_13_Camping.common.CommonProxyConnor_13_Camping")
+	@SidedProxy(clientSide = "Connor_13_Camping.camping.client.ClientProxyConnor_13_Camping", serverSide = "Connor_13_Camping.camping.common.CommonProxyConnor_13_Camping")
 	public static CommonProxyConnor_13_Camping proxy;
 	
 	public static CreativeTabs Camping = new CreativeTabCamping("Camping");
@@ -61,6 +62,10 @@ public class CampingMod
 	
 	public static Block lantern;
 	public static Item lanternIcon;
+	public static Block lanternstand;
+	public static Item lanternstandIcon;
+	public static Block table;
+	public static Item tableIcon;
 
 	@Init
 	public void load(FMLInitializationEvent event)
@@ -73,16 +78,27 @@ public class CampingMod
 		TentBlock = new CampingBlockCabinBlock(252, true).setHardness(3.0F).setResistance(10.0F).setUnlocalizedName("tentblock").setCreativeTab(CampingMod.Camping);//add in the rest
 		
 		lantern = (new CampingBlockLantern(212, CampingTileEntityLantern.class)).setHardness(.2F).setLightValue(.9F).setUnlocalizedName("lantern");
-		lanternIcon = (new CampingItemLantern(213, lantern)).setUnlocalizedName("lanternIcon").setCreativeTab(CampingMod.Camping);
+		lanternIcon = (new CampingItemCustomBlock(213, lantern)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("lanternIcon");
+		lanternstand = (new CampingBlockLanternStand(214, CampingTileEntityLanternStand.class)).setHardness(.2F).setUnlocalizedName("lanternstand");
+		lanternstandIcon = (new CampingItemCustomBlock(215, lanternstand)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("lanternstandIcon");
+		table = (new CampingBlockTable(216, CampingTileEntityTable.class)).setHardness(.2F).setUnlocalizedName("table");
+		tableIcon = (new CampingItemCustomBlock(217, table)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("tableIcon");
 		
 		LanguageRegistry.addName(TentPlacer, "Tent Placer");	
 		LanguageRegistry.addName(TentBlock, "Tent Block");
 		LanguageRegistry.addName(lanternIcon, "Lantern");
+		LanguageRegistry.addName(lanternstandIcon, "Lantern Stand");
+		LanguageRegistry.addName(tableIcon, "Table");
 		
 		GameRegistry.registerBlock(TentBlock);
 		GameRegistry.registerBlock(lantern);
+		GameRegistry.registerBlock(lanternstand);
+		GameRegistry.registerBlock(table);
 		GameRegistry.registerTileEntity(CampingTileEntityLantern.class, "TileEntityLantern");
+		GameRegistry.registerTileEntity(CampingTileEntityLanternStand.class, "TileEntityLanternStand");
+		GameRegistry.registerTileEntity(CampingTileEntityTable.class, "TileEntityTable");
 
+		
 		GameRegistry.addRecipe(new ItemStack(TentPlacer, 1), new Object[]
 		{
 			" X ", " X ", " X ", 'X', Block.pumpkin
@@ -95,6 +111,14 @@ public class CampingMod
 		GameRegistry.addRecipe(new ItemStack(lanternIcon, 1), new Object[]
 		{
 			" X ", " X ", " X ", 'X', Block.gravel
+		});
+		GameRegistry.addRecipe(new ItemStack(lanternstandIcon, 1), new Object[]
+		{
+			" X ", " X ", " X ", 'X', Block.sand
+		});
+		GameRegistry.addRecipe(new ItemStack(tableIcon, 1), new Object[]
+		{
+			" X ", " X ", " X ", 'X', Block.wood
 		});
 	}
 }

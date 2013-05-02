@@ -1,6 +1,8 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common.blocks;
 
 import java.util.Random;
+
+import Connor_13_Camping.camping.common.CampingMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 
 public class CampingBlockCabinBlock extends Block
 {    
-	protected CampingBlockCabinBlock(int par1, boolean par2)
+	public CampingBlockCabinBlock(int par1, boolean par2)
 	{
     	super(par1, Material.wood);
 	}

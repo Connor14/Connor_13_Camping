@@ -1,5 +1,6 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common.items;
 
+import Connor_13_Camping.camping.common.CampingMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -10,12 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class CampingItemLantern extends Item
+public class CampingItemCustomBlock extends Item
 {
     /** The ID of the block the reed will spawn when used from inventory bar. */
     private int spawnID;
 
-    public CampingItemLantern(int par1, Block par2Block)
+    public CampingItemCustomBlock(int par1, Block par2Block)
     {
         super(par1);
         this.spawnID = par2Block.blockID;

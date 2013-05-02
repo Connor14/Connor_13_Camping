@@ -1,4 +1,4 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common.models;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

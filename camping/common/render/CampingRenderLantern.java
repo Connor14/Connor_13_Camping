@@ -1,9 +1,12 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common.render;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
+
+import Connor_13_Camping.camping.common.models.CampingModelLantern;
+import Connor_13_Camping.camping.common.tile_entities.CampingTileEntityLantern;
 
 public class CampingRenderLantern extends TileEntitySpecialRenderer
 {

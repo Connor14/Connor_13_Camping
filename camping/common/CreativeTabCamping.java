@@ -1,4 +1,4 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -13,6 +13,6 @@ public class CreativeTabCamping extends CreativeTabs
 	@Override
 	public ItemStack getIconItemStack() 
 	{
-	    return new ItemStack(CampingMod.TentPlacer);
+	    return new ItemStack(CampingMod.lanternIcon);
 	}
 }

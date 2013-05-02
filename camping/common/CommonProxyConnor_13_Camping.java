@@ -1,4 +1,4 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common;
 
 public class CommonProxyConnor_13_Camping 
 {

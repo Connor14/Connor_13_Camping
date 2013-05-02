@@ -1,4 +1,4 @@
-package Connor_13_Camping.common;
+package Connor_13_Camping.camping.common.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

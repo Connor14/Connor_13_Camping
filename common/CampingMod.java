@@ -1,6 +1,7 @@
 package Connor_13_Camping.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemReed;
@@ -13,9 +14,11 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
-@Mod(modid = "connor_Camping", name = "Camping", version = "1.0")
+@Mod(modid = CampingMod.modid, name = "Camping", version = "1.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
 //Seprate Mod
@@ -25,10 +28,28 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 		//New Food
 		//Drinks
 
+//Textures
+	/*textures go here: minecraft.jar - /mods/Connor_Camping/textures/blocks or /items
+	*all textures must be named block.unlocalizedName.png
+	*all files must have this:
+	*/
+		/**
+		@SideOnly(Side.CLIENT)
+		public void updateIcons(IconRegister par1IconRegister)
+		{
+			this.iconIndex or this.blockIcon = par1IconRegister.registerIcon(CampingMod.modid + ":" + this.getUnlocalizedName());
+		}
+		*/
 
-//Find a custom model rendering video tutorial
+//To do list
+	/*try making 1 file for all custom block TileEntities
+	 * 
+	 * 
+	 */
+
 public class CampingMod 
 {
+    public static final String modid = "Connor_Camping";
 	
 	@SidedProxy(clientSide = "Connor_13_Camping.client.ClientProxyConnor_13_Camping", serverSide = "Connor_13_Camping.common.CommonProxyConnor_13_Camping")
 	public static CommonProxyConnor_13_Camping proxy;
@@ -52,7 +73,7 @@ public class CampingMod
 		TentBlock = new CampingBlockCabinBlock(252, true).setHardness(3.0F).setResistance(10.0F).setUnlocalizedName("tentblock").setCreativeTab(CampingMod.Camping);//add in the rest
 		
 		lantern = (new CampingBlockLantern(212, CampingTileEntityLantern.class)).setHardness(.2F).setLightValue(.9F).setUnlocalizedName("lantern");
-		lanternIcon = (new ItemReed(213, lantern)).setUnlocalizedName("lanternIcon");
+		lanternIcon = (new CampingItemLantern(213, lantern)).setUnlocalizedName("lanternIcon").setCreativeTab(CampingMod.Camping);
 		
 		LanguageRegistry.addName(TentPlacer, "Tent Placer");	
 		LanguageRegistry.addName(TentBlock, "Tent Block");

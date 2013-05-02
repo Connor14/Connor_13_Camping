@@ -18,7 +18,7 @@ public class CampingRenderLantern extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glTranslatef((float)d + 0.5F, (float)d1 + 1.52F, (float)d2 + 0.5F);
         GL11.glRotatef(180F, 0F, 0F, 1F);
-        bindTextureByName("/C13/lantern.png");
+        bindTextureByName("/mods/Connor_Camping/textures/blocks/block.lantern.png");
         GL11.glPushMatrix();
         aModel.renderModel(0.0625F);
         GL11.glPopMatrix();     

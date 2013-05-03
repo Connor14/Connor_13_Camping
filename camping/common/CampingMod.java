@@ -43,7 +43,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 		*/
 
 //To do list
-	/*try making 1 file for all custom block TileEntities
+	/*fix item drops from custom blocks
 	 * 
 	 * 
 	 */
@@ -66,6 +66,8 @@ public class CampingMod
 	public static Item lanternstandIcon;
 	public static Block table;
 	public static Item tableIcon;
+	public static Block firepit;
+	public static Item firepitIcon;
 
 	@Init
 	public void load(FMLInitializationEvent event)
@@ -83,20 +85,25 @@ public class CampingMod
 		lanternstandIcon = (new CampingItemCustomBlock(215, lanternstand)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("lanternstandIcon");
 		table = (new CampingBlockTable(216, CampingTileEntityTable.class)).setHardness(.2F).setUnlocalizedName("table");
 		tableIcon = (new CampingItemCustomBlock(217, table)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("tableIcon");
-		
+		firepit = (new CampingBlockFirePit(218, CampingTileEntityFirePit.class)).setHardness(.2F).setUnlocalizedName("firepit");
+		firepitIcon = (new CampingItemCustomBlock(219, firepit)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("firepitIcon");
+
 		LanguageRegistry.addName(TentPlacer, "Tent Placer");	
 		LanguageRegistry.addName(TentBlock, "Tent Block");
 		LanguageRegistry.addName(lanternIcon, "Lantern");
 		LanguageRegistry.addName(lanternstandIcon, "Lantern Stand");
 		LanguageRegistry.addName(tableIcon, "Table");
+		LanguageRegistry.addName(firepitIcon, "Firepit");
 		
 		GameRegistry.registerBlock(TentBlock);
 		GameRegistry.registerBlock(lantern);
 		GameRegistry.registerBlock(lanternstand);
 		GameRegistry.registerBlock(table);
+		GameRegistry.registerBlock(firepit);
 		GameRegistry.registerTileEntity(CampingTileEntityLantern.class, "TileEntityLantern");
 		GameRegistry.registerTileEntity(CampingTileEntityLanternStand.class, "TileEntityLanternStand");
 		GameRegistry.registerTileEntity(CampingTileEntityTable.class, "TileEntityTable");
+		GameRegistry.registerTileEntity(CampingTileEntityFirePit.class, "TileEntityFirePit");
 
 		
 		GameRegistry.addRecipe(new ItemStack(TentPlacer, 1), new Object[]

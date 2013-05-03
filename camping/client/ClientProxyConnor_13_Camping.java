@@ -17,6 +17,7 @@ public class ClientProxyConnor_13_Camping extends CommonProxyConnor_13_Camping
     	ClientRegistry.bindTileEntitySpecialRenderer(CampingTileEntityLantern.class, new CampingRenderLantern());
     	ClientRegistry.bindTileEntitySpecialRenderer(CampingTileEntityLanternStand.class, new CampingRenderLanternStand());
     	ClientRegistry.bindTileEntitySpecialRenderer(CampingTileEntityTable.class, new CampingRenderTable());
+    	ClientRegistry.bindTileEntitySpecialRenderer(CampingTileEntityFirePit.class, new CampingRenderFirePit());
 
 	}
 }

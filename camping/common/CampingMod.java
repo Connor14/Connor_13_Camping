@@ -48,6 +48,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 	 * 
 	 */
 
+//Bugs
+	/*if there are two firepits down and one is activated, both will be activated.
+	 * 
+	 */
+
 public class CampingMod 
 {
     public static final String modid = "Connor_Camping";

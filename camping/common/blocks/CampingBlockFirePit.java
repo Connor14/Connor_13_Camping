@@ -53,11 +53,13 @@ public class CampingBlockFirePit extends BlockContainer
         	if(isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.bucketWater.itemID)
         	{
         		isActive = false;
+        		this.setLightValue(0F);        		
         		return true;
         	}
         	else if (!isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.flintAndSteel.itemID)
         	{
         		isActive = true;
+        		this.setLightValue(.9F);        		
         		return true;
         	}
         }
@@ -73,16 +75,46 @@ public class CampingBlockFirePit extends BlockContainer
     {
         if (isActive)
         {
-            float f = (float)par2 + 0.5F;
-            float f1 = (float)par3 + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
-            float f2 = (float)par4 + 0.5F;
-            float f3 = 0.52F;
-            float f4 = par5Random.nextFloat() * 0.6F - 0.3F;
-
-            par1World.spawnParticle("smoke", (double)(f - f3), (double)f1, (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-            par1World.spawnParticle("flame", (double)(f - f3), (double)f1, (double)(f2 + f4), 0.0D, 0.0D, 0.0D);
-    
+            double d0 = (double)((float)par2 + 0.53125F);
+            double d1 = (double)((float)par3 + 0.25F);
+            double d2 = (double)((float)par4 + 0.53125F);
+            
+            //Smoke and flame for EXACT center (0.53125)
+            par1World.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            
+            //Offset Z (0.265625)
+            //(-)
+            par1World.spawnParticle("smoke", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0, d1, d2 - 0.265625, 0.0D, 0.0D, 0.0D);
+            //(+)
+            par1World.spawnParticle("smoke", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0, d1, d2 + 0.265625, 0.0D, 0.0D, 0.0D);
+            
+            //Offset X (0.265625)
+            //(-)
+            par1World.spawnParticle("smoke", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0 - 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+            //(+)
+            par1World.spawnParticle("smoke", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0 + 0.265625, d1, d2, 0.0D, 0.0D, 0.0D);
+            
+            //Increase Y
+            par1World.spawnParticle("smoke", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0, d1 + 0.25, d2, 0.0D, 0.0D, 0.0D);
+            
+            par1World.spawnParticle("smoke", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
+            par1World.spawnParticle("flame", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
         }
+    }
+    
+    /**
+     * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
+     */
+    public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int par5) 
+    {
+    	isActive = false;
+    	this.setLightValue(0F);
     }
 
     public int idDropped(int i, Random random, int j)
@@ -95,7 +127,8 @@ public class CampingBlockFirePit extends BlockContainer
     	  return 1;
     }
     
-    public int getRenderType(){
+    public int getRenderType()
+    {
 		return -1;
     }
     

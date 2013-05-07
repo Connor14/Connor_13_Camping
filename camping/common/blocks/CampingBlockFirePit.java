@@ -61,7 +61,8 @@ public class CampingBlockFirePit extends BlockContainer
     @SideOnly(Side.CLIENT)
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-    	return (world.getBlockMetadata(x, y, z) & 1) == 1 ? 13 : 0;    	
+    	//The ? is a shortcut for an if - else statement (fist is true, second is false).  7 is the level when block is lit and 0 is the level for unlit
+    	return (world.getBlockMetadata(x, y, z) & 1) == 1 ? 7 : 0;    	
     }
     
     @SideOnly(Side.CLIENT)

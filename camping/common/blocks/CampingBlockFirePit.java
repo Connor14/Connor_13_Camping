@@ -8,12 +8,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import Connor_13_Camping.camping.common.CampingMod;
 import Connor_13_Camping.camping.common.tile_entities.CampingTileEntityFirePit;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class CampingBlockFirePit extends BlockContainer
@@ -28,38 +30,26 @@ public class CampingBlockFirePit extends BlockContainer
       setBlockBounds(0F, 0F, 0F, 1F, .25F, 1F);
       this.setTickRandomly(true);
 	}
-   
-    public TileEntity getBlockEntity()
-    {
-    	try
-    	{
-    		return (TileEntity)TestEntityClass.newInstance();
-    	}
-    	catch(Exception exception)
-    	{
-    		throw new RuntimeException(exception);
-    	}
-    } 
     
-    private boolean isActive = false;
+    private boolean isActive1 = false;
     
     /**
      * Called upon block activation (right click on the block.)
      */
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
-        if(par5EntityPlayer.getCurrentEquippedItem() != null)
+    	int metadata = par1World.getBlockMetadata(par2, par3, par4);
+    	boolean isActive = (metadata & 1) == 1;
+    	if(par5EntityPlayer.getCurrentEquippedItem() != null)
         {
         	if(isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.bucketWater.itemID)
         	{
-        		isActive = false;
-        		this.setLightValue(0F);        		
+                par1World.setBlock(par2, par3, par4, this.blockID, metadata + 1, 3);
         		return true;
         	}
         	else if (!isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.flintAndSteel.itemID)
         	{
-        		isActive = true;
-        		this.setLightValue(.9F);        		
+                par1World.setBlock(par2, par3, par4, this.blockID, metadata + 1, 3);
         		return true;
         	}
         }
@@ -67,12 +57,21 @@ public class CampingBlockFirePit extends BlockContainer
         return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+    	return (world.getBlockMetadata(x, y, z) & 1) == 1 ? 13 : 0;    	
+    }
+    
     @SideOnly(Side.CLIENT)
     /**
      * A randomly called display update to be able to add particles or other items for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
+    {    	
+    	int metadata = par1World.getBlockMetadata(par2, par3, par4);
+    	boolean isActive = (metadata & 1) == 1;
         if (isActive)
         {
             double d0 = (double)((float)par2 + 0.53125F);
@@ -106,15 +105,6 @@ public class CampingBlockFirePit extends BlockContainer
             par1World.spawnParticle("smoke", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
             par1World.spawnParticle("flame", d0, d1 + 0.5, d2, 0.0D, 0.0D, 0.0D);
         }
-    }
-    
-    /**
-     * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
-     */
-    public void onBlockDestroyedByPlayer(World par1World, int x, int y, int z, int par5) 
-    {
-    	isActive = false;
-    	this.setLightValue(0F);
     }
 
     public int idDropped(int i, Random random, int j)

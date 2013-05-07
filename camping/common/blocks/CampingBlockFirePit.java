@@ -44,12 +44,12 @@ public class CampingBlockFirePit extends BlockContainer
         {
         	if(isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.bucketWater.itemID)
         	{
-                par1World.setBlock(par2, par3, par4, this.blockID, metadata + 1, 3);
+                par1World.setBlock(par2, par3, par4, this.blockID, metadata & ~1, 3);
         		return true;
         	}
         	else if (!isActive && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.flintAndSteel.itemID)
         	{
-                par1World.setBlock(par2, par3, par4, this.blockID, metadata + 1, 3);
+                par1World.setBlock(par2, par3, par4, this.blockID, metadata | 1, 3);
         		return true;
         	}
         }

@@ -73,6 +73,11 @@ public class CampingMod
 	public static Item tableIcon;
 	public static Block firepit;
 	public static Item firepitIcon;
+	
+	public static Block extratallgrassTop;
+	public static Block extratallgrassMiddle;
+	public static Block extratallgrassBase;
+	public static Item extratallgrassIcon;
 
 	@Init
 	public void load(FMLInitializationEvent event)
@@ -93,18 +98,22 @@ public class CampingMod
 		firepit = (new CampingBlockFirePit(218, CampingTileEntityFirePit.class)).setHardness(.2F).setUnlocalizedName("firepit");
 		firepitIcon = (new CampingItemCustomBlock(219, firepit)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("firepitIcon");
 
+		extratallgrassTop = (new HuntingBlockExtraTallGrass(220)).setCreativeTab(CampingMod.Camping).setUnlocalizedName("extratallgrassTop");
+		
 		LanguageRegistry.addName(TentPlacer, "Tent Placer");	
 		LanguageRegistry.addName(TentBlock, "Tent Block");
 		LanguageRegistry.addName(lanternIcon, "Lantern");
 		LanguageRegistry.addName(lanternstandIcon, "Lantern Stand");
 		LanguageRegistry.addName(tableIcon, "Table");
 		LanguageRegistry.addName(firepitIcon, "Firepit");
+		LanguageRegistry.addName(extratallgrassTop, "Block");
 		
 		GameRegistry.registerBlock(TentBlock);
 		GameRegistry.registerBlock(lantern);
 		GameRegistry.registerBlock(lanternstand);
 		GameRegistry.registerBlock(table);
 		GameRegistry.registerBlock(firepit);
+		GameRegistry.registerBlock(extratallgrassTop);
 		GameRegistry.registerTileEntity(CampingTileEntityLantern.class, "TileEntityLantern");
 		GameRegistry.registerTileEntity(CampingTileEntityLanternStand.class, "TileEntityLanternStand");
 		GameRegistry.registerTileEntity(CampingTileEntityTable.class, "TileEntityTable");
